@@ -23,7 +23,7 @@ public:
 	{
 		this->y = y;
 	}
-	double distance(Point& B)const
+	double distance(const Point& B)const
 	{
 		return sqrt(pow((this->x - B.x), 2) + pow((B.y - this->y), 2));
 	}
@@ -39,7 +39,11 @@ public:
 		cout << "Destructor:\t\t" << this << endl;
 	}
 };
-double distance(Point& A, Point& B);
+
+double distance(const Point& A, const Point& B)
+{
+	return sqrt(pow((A.get_x() - B.get_x()), 2) + pow((B.get_y() - A.get_y()), 2));
+}
 
 //#define STRUCT_POINT
 //#define CLASSROOM
@@ -79,15 +83,10 @@ void main()
 	B.set_x(x);
 	B.set_y(y);
 	cout << "Растояние до точки A от заданной точки: " << A.distance(B) << endl;
-	cout << "Растояние между точками А и Б: " << distance(A,B) << endl;
+	cout << "Растояние между точками А и Б: " << distance(A, B) << endl;
 #endif // DZ
 
 
-}
-
-double distance(Point& A, Point& B)
-{
-	return sqrt(pow((A.get_x() - B.get_x()), 2) + pow((B.get_y() - A.get_y()), 2));
 }
 
 /*
