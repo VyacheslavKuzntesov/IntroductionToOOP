@@ -42,8 +42,8 @@ public:
 double distancee(const Point& A, const Point& B);
 
 //#define STRUCT_POINT
-#define CLASSROOM
-//#define DZ
+//#define CLASSROOM
+#define DZ
 
 void main()
 {
@@ -59,10 +59,13 @@ void main()
 	cout << pA->x << "\t" << pA->y << endl;
 #endif // STRUCT_POINT
 
+#ifdef CLASSROOM
 	Point A;
 	//A.set_x(2);
 	//A.set_y(3);
 	cout << A.get_x() << "\t" << A.get_y() << endl;
+#endif // CLASSROOM
+
 
 #ifdef DZ
 	int x;
@@ -72,14 +75,11 @@ void main()
 	cout << "Введите координаты точки A: "; cin >> x; cin >> y;
 	A.set_x(x);
 	A.set_y(y);
-	cout << "Введите координаты точки от которой будем считать растояние до точки А: "; cin >> x; cin >> y;
-	cout << "Растояние до точки A от заданной точки: " << A.distance(x, y) << endl;
 	cout << "Введите координаты точки Б: "; cin >> x; cin >> y;
 	B.set_x(x);
 	B.set_y(y);
-	cout << "Введите координаты точки от которой будем считать растояние до точки А: "; cin >> x; cin >> y;
-	cout << "Растояние до точки A от заданной точки: " << B.distance(x, y) << endl;
-	cout << "Растояние между точками А и Б: " << distancee(A.get_x(), A.get_y(), B.get_x(), B.get_y()) << endl;
+	cout << "Растояние до точки A от заданной точки: " << A.distance(B) << endl;
+	cout << "Растояние между точками А и Б: " << distancee(A,B) << endl;
 #endif // DZ
 
 
