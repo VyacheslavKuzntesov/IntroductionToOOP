@@ -39,7 +39,7 @@ public:
 		cout << "Destructor:\t\t" << this << endl;
 	}
 };
-double distancee(Point& A, Point& B);
+double distance(Point& A, Point& B);
 
 //#define STRUCT_POINT
 //#define CLASSROOM
@@ -79,13 +79,13 @@ void main()
 	B.set_x(x);
 	B.set_y(y);
 	cout << "Растояние до точки A от заданной точки: " << A.distance(B) << endl;
-	cout << "Растояние между точками А и Б: " << distancee(A,B) << endl;
+	cout << "Растояние между точками А и Б: " << distance(A,B) << endl;
 #endif // DZ
 
 
 }
 
-double distancee(Point& A, Point& B)
+double distance(Point& A, Point& B)
 {
 	return sqrt(pow((A.get_x() - B.get_x()), 2) + pow((B.get_y() - A.get_y()), 2));
 }
