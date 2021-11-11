@@ -23,9 +23,9 @@ public:
 	{
 		this->y = y;
 	}
-	double distance()
+	double distance(int x,int y)
 	{
-		double distance = sqrt(pow(this->x, 2) + pow(this->y, 2));
+		double distance = sqrt(pow((this->x - x), 2) + pow((this->y - y), 2));
 		return distance;
 	}
 };
@@ -57,11 +57,13 @@ void main()
 	cout << "Введите координаты точки A: "; cin >> x; cin >> y;
 	A.set_x(x);
 	A.set_y(y);
-	cout << "Растояние до точки A: " << A.distance() << endl;
+	cout << "Введите координаты точки от которой будем считать растояние до точки А: "; cin >> x; cin >> y;
+	cout << "Растояние до точки A от заданной точки: " << A.distance(x,y) << endl;
 	cout << "Введите координаты точки Б: "; cin >> x; cin >> y;
 	B.set_x(x);
 	B.set_y(y);
-	cout << "Растояние до точки Б: " << B.distance() << endl;
+	cout << "Введите координаты точки от которой будем считать растояние до точки А: "; cin >> x; cin >> y;
+	cout << "Растояние до точки A от заданной точки: " << B.distance(x,y) << endl;
 	cout << "Растояние между точками А и Б: " << distancee(A.get_x(), A.get_y(), B.get_x(), B.get_y()) << endl;
 }
 
