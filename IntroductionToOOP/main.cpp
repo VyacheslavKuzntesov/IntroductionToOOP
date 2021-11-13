@@ -1,6 +1,9 @@
 #include<iostream>
 #include<math.h>
 using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
 
 class Point //создание структуры или класса
 {
@@ -29,14 +32,47 @@ public:
 	}
 
 	//									Constructors:
-	Point()
+	//Point()
+	//{
+	//	x = y = double();//В обе координаты ложим значение по умолчанию для double
+	//	cout << "DefaultConstructor:\t" << this << endl;
+	//}
+	/*Point(double x)
 	{
-		x = y = double();//В обе координаты ложим значение по умолчанию для double
-		cout << "DefaultConstructor:\t" << this << endl;
+		this->x = x;
+		this->y = 0;
+		cout << "SingleArgumentConstructor:" << this << endl;
+	}*/
+	Point(double x = 0, double y = 0)
+	{
+		this->x = x;
+		this->y = y;
+		cout << "Constructor:\t" << this << endl;
+	}
+	Point(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyConstructor:" << this << endl;
 	}
 	~Point()
 	{
-		cout << "Destructor:\t\t" << this << endl;
+		cout << "Destructor:\t" << this << endl;
+	}
+
+	//									Operators:
+	Point operator=(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyAssigment:\t" << this << endl;
+		return *this;
+	}
+
+	//									Methods:
+	void print()const
+	{
+		cout << "X = " << x << "\tY = " << y << endl;
 	}
 };
 
@@ -46,8 +82,8 @@ double distance(const Point& A, const Point& B)
 }
 
 //#define STRUCT_POINT
-//#define CLASSROOM
-#define DZ
+//#define CONSTRUCTORS_CHECK
+//#define DZ
 
 void main()
 {
@@ -63,13 +99,35 @@ void main()
 	cout << pA->x << "\t" << pA->y << endl;
 #endif // STRUCT_POINT
 
-#ifdef CLASSROOM
-	Point A;
+#ifdef CONSTRUCTORS_CHECK
+	Point A;		//Default constructor
 	//A.set_x(2);
 	//A.set_y(3);
 	cout << A.get_x() << "\t" << A.get_y() << endl;
-#endif // CLASSROOM
+	Point B = 5;	//Single-argument constructor
+	B.print();
 
+	Point C(7);		//Single-argument constructor
+	C.print();
+
+	Point D(4, 5);	//
+	D.print();
+
+	Point E = D;	//Copy Constructor
+	E.print();
+
+	Point F;		//Default constructor
+	F = E;			//Copy assignment
+	F.print();
+
+#endif // CONSTRUCTORS_CHECK
+
+	int a, b, c;
+	a = b = c = 0;
+	Point A, B, C;
+	cout << "\n---------------------------------------------\n";
+	A = B = C = Point(2,3);
+	cout << "\n---------------------------------------------\n";
 
 #ifdef DZ
 	int x;
@@ -208,6 +266,13 @@ this - это указатель на объект для которого вызываеться метод изнутри метода нев
 по умолчанию - это конструктор который может быть вызван без параметров. Это может быть конструктор не принимающий никаких параметров или же конструктор каждый параметр которого имеет значение по умолчанию
 Если в классе нет ни одного конструктора то компилятор сам добавит туда конструктор по умалчанию по скольку без конструктора невозможно создать объект этот не явный конструктор по умалчанию просто выделит память под объект и заполнит его поля мусором
 КОНСТРУКТОР И ДИСТРУКТОР ВСЕГДА НАЗЫВАЮТСЯ ТАКЖЕ КАК И КЛАСС НО ПЕРЕД ДИСТРУКТОРОМ ВСЕГДА СТАВИТЬСЯ (~ - TILDA)
+
+
+Конструктор Копирования - это конструктор который копирует объект а точнее создаваемый объект делает точной копией другого существуещего объекта или выполняет побитовое копирование
+Контсруктор копирования всегда принимает константную сылку на объект
+Конструктор копирования можно вызвать лишь присоздании объекта его нельзя вызвать для существующего объекта если есть необходимость существующий объект сделать точной копией другого существующего объекта в классе должен быть оператор присваивания
+Оператор присваивания делает существующий объект точной копией другого существующего объекта тоесть он делает тоже самое что конструктор копирования но не для создаваемого а для существующего объекта
+
 
 */
 
