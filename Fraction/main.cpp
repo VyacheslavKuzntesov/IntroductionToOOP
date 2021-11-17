@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include<math.h>
 using namespace std;
 using std::cin;
@@ -117,7 +117,7 @@ public:
 
 	void print()const
 	{
-		cout << "Âàøà äðîáü = " << integer << " (" << numerator << "/" << denominator << ")" << endl;
+		cout << "Ð’Ð°ÑˆÐ° Ð´Ñ€Ð¾Ð±ÑŒ = " << integer << " (" << numerator << "/" << denominator << ")" << endl;
 	}
 };
 
@@ -167,7 +167,7 @@ Fraction operator/(const Fraction& left, const Fraction& right)
 
 ostream& operator<<(ostream& os, const Fraction& obj)
 {
-	os << "Âàøà äðîáü = " << obj.get_integer() << " (" << obj.get_numerator() << "/" << obj.get_denominator() << ")" << endl;
+	os << "Ð’Ð°ÑˆÐ° Ð´Ñ€Ð¾Ð±ÑŒ = " << obj.get_integer() << " (" << obj.get_numerator() << "/" << obj.get_denominator() << ")" << endl;
 	return os;
 }
 
