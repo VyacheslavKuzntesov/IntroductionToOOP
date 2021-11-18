@@ -55,12 +55,25 @@ public:
 		this->denominator = denominator;
 	}
 
+	Fraction reduce()
+	{
+		if (this->numerator >= this->denominator)
+		{
+			for (;this->numerator > this->denominator;)
+			{
+				this->numerator - this->denominator;
+				this->integer++;
+			}
+		}
+		return this;
+	}
+
 	Fraction(bool minus = false, int integer = 0, int numerator = 0, int denominator = 1)
 	{
 		this->minus = minus;
 		this->integer = integer;
 		this->numerator = numerator;
-		this->denominator = denominator;
+		set_denominator(denominator);
 		cout << "Constructor:\t" << this << endl;
 	}
 
@@ -150,7 +163,7 @@ Fraction operator-(const Fraction& left, const Fraction& right)
 Fraction operator*(const Fraction& left, const Fraction& right)
 {
 	Fraction result;
-	result.set_numerator((left.get_numerator()+(left.get_integer()*left.get_denominator())) * (right.get_numerator()+(right.get_integer()*right.get_denominator())));
+	result.set_numerator((left.get_numerator() + (left.get_integer() * left.get_denominator())) * (right.get_numerator() + (right.get_integer() * right.get_denominator())));
 	result.set_denominator(left.get_denominator() * right.get_denominator());
 	result.set_integer(0);
 	return result;
@@ -159,8 +172,8 @@ Fraction operator*(const Fraction& left, const Fraction& right)
 Fraction operator/(const Fraction& left, const Fraction& right)
 {
 	Fraction result;
-	result.set_numerator((left.get_numerator()+(left.get_integer()*left.get_denominator())) * right.get_denominator());
-	result.set_denominator(left.get_denominator() * (right.get_numerator()+(right.get_integer()*right.get_denominator())));
+	result.set_numerator((left.get_numerator() + (left.get_integer() * left.get_denominator())) * right.get_denominator());
+	result.set_denominator(left.get_denominator() * (right.get_numerator() + (right.get_integer() * right.get_denominator())));
 	result.set_integer(0);
 	return result;
 }
@@ -174,10 +187,10 @@ ostream& operator<<(ostream& os, const Fraction& obj)
 void main()
 {
 	setlocale(LC_ALL, "");
-	
+
 	Fraction A(0, 1, 2, 3);
 	Fraction B(0, 4, 5, 6);
-	
+
 	A.print();
 	B.print();
 
@@ -188,6 +201,15 @@ void main()
 	(A - B).print();
 	(A * B).print();
 	(A / B).print();
+
+	Fraction C;
+	C = (A + B);
+	C.print();
+	C.reduce();
+	cout << C << endl;
+	/*cout << (A - B).reduce() << endl;
+	cout << (A * B).reduce() << endl;
+	cout << (A / B).reduce() << endl;*/
 
 	A = B;
 	A.print();
