@@ -1,11 +1,11 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 
 class Fraction
 {
-	int integer;		//целая часть
-	int numerator;		//Числитель
-	int denominator;	//Знаменатель
+	int integer;		//С†РµР»Р°СЏ С‡Р°СЃС‚СЊ
+	int numerator;		//Р§РёСЃР»РёС‚РµР»СЊ
+	int denominator;	//Р—РЅР°РјРµРЅР°С‚РµР»СЊ
 public:
 	int get_integer()const
 	{
