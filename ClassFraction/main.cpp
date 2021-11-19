@@ -94,8 +94,9 @@ public:
 
 	Fraction inverted_numerator_minus()
 	{
-		if (numerator < 0)numerator * -1;
-		return *this;
+		Fraction inverted = *this;
+		if (inverted.numerator < 0)inverted.numerator = inverted.numerator * -1;
+		return inverted;
 	}
 
 	void print()const
@@ -137,7 +138,7 @@ public:
 		this->numerator = (this->numerator * other.get_denominator()) - (other.get_numerator() * this->denominator);
 		this->denominator = this->denominator * other.get_denominator();
 		this->to_proper();
-		if (this->numerator<0)this->numerator = this->numerator * -1;
+		*this = this->inverted_numerator_minus();
 		return *this;
 	}
 
@@ -154,9 +155,10 @@ public:
 	{
 		this->to_improper();
 		other.to_improper();
+		other = other.inverted();
 		cout << this->get_denominator() << endl;
-		this->numerator = this->numerator * other.get_denominator();
-		this->denominator = this->denominator * other.get_numerator();
+		this->numerator = this->numerator * other.get_numerator();
+		this->denominator = this->denominator * other.get_denominator();
 		return this->to_proper();
 	}
 
