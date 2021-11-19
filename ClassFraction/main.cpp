@@ -1,12 +1,17 @@
 ﻿#include<iostream>
 using namespace std;
 
+class Fraction;
+Fraction operator*(Fraction left, Fraction right); //Прототип функции умножить Прототип функции - это объявление функции
+
 class Fraction
 {
 	int integer;		//целая часть
 	int numerator;		//Числитель
 	int denominator;	//Знаменатель
+
 public:
+
 	int get_integer()const
 	{
 		return integer;
@@ -62,6 +67,13 @@ public:
 		set_denominator(denominator);
 		cout << "Constructor:\t" << this << endl;
 	}
+	Fraction(const Fraction& other)
+	{
+		this->integer = other.integer;
+		this->numerator = other.numerator;
+		this->denominator = other.denominator;
+		cout << "CopyCostructor:\t" << this << endl;
+	}
 	~Fraction()
 	{
 		cout << "Destructor:\t" << this << endl;
@@ -92,10 +104,10 @@ public:
 		return inverted;
 	}
 
-	Fraction inverted_numerator_minus()
+	Fraction inverted_numerator_minus()const
 	{
 		Fraction inverted = *this;
-		if (inverted.numerator < 0)inverted.numerator = inverted.numerator * -1;
+		if (inverted.numerator < 0 && inverted.integer != 0)inverted.numerator = inverted.numerator * -1;
 		return inverted;
 	}
 
@@ -112,6 +124,8 @@ public:
 		cout << endl;
 	}
 
+	//							Operators:
+
 	Fraction& operator=(const Fraction& other)
 	{
 		this->integer = other.integer;
@@ -121,7 +135,7 @@ public:
 		return *this;
 	}
 
-	Fraction operator+=(Fraction other)
+	Fraction& operator+=(Fraction other)
 	{
 		this->to_improper();
 		other.to_improper();
@@ -131,7 +145,7 @@ public:
 		return *this;
 	}
 
-	Fraction operator-=(Fraction other)
+	Fraction& operator-=(Fraction other)
 	{
 		this->to_improper();
 		other.to_improper();
@@ -142,16 +156,17 @@ public:
 		return *this;
 	}
 
-	Fraction operator*=(Fraction other)
+	Fraction& operator*=(const Fraction other)
 	{
-		this->to_improper();
+		/*this->to_improper();
 		other.to_improper();
 		this->numerator = this->get_numerator() * other.get_numerator();
 		this->denominator = this->get_denominator() * other.get_denominator();
-		return this->to_proper();
+		return this->to_proper();*/
+		return *this = *this * other;
 	}
 
-	Fraction operator/=(Fraction other)
+	Fraction& operator/=(Fraction other)
 	{
 		this->to_improper();
 		other.to_improper();
@@ -161,8 +176,8 @@ public:
 		this->denominator = this->denominator * other.get_denominator();
 		return this->to_proper();
 	}
-
-	Fraction operator++()
+	//											Increment/Decrement
+	Fraction& operator++()
 	{
 		integer++;
 		return *this;
@@ -171,11 +186,11 @@ public:
 	Fraction operator++(int)
 	{
 		Fraction old = *this;
-		old.integer++;
+		integer++;
 		return old;
 	}
 
-	Fraction operator--()
+	Fraction& operator--()
 	{
 		integer--;
 		return *this;
@@ -184,7 +199,7 @@ public:
 	Fraction operator--(int)
 	{
 		Fraction old = *this;
-		old.integer--;
+		integer--;
 		return old;
 	}
 };
@@ -238,7 +253,7 @@ Fraction operator-(Fraction left, Fraction right)
 	right.to_improper();
 	Fraction result((left.get_numerator() * right.get_denominator()) - (right.get_numerator() * left.get_denominator()), left.get_denominator() * right.get_denominator());
 	result.to_proper();
-	result.set_numerator(result.get_numerator() * (-1));
+	result.inverted_numerator_minus();
 	return result.inverted_numerator_minus();
 }
 
@@ -266,10 +281,16 @@ void main()
 	int a = 2;
 	int b = 3;
 	int c = a * b;
+	c++;
 
 	Fraction A(2, 3, 4);
 	Fraction B(3, 4, 5);
-	Fraction C = A * B;
+	A *= B;
+	A.print();
+	A = B++;
+	A.print();
+	B.print();
+	/*Fraction C = A * B;
 	C.print();
 
 	C = A / B;
@@ -287,15 +308,15 @@ void main()
 	Fraction D(2, 3, 4);
 	D /= B;
 	D.print();
-	
+
 	A = D;
 	A.print();
 
 	A = Fraction(2, 3, 4);
 	A += B;
 	A.print();
-	
+
 	A = Fraction(2, 3, 4);
 	A -= B;
-	A.print();
+	A.print();*/
 }
