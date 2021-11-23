@@ -202,6 +202,7 @@ public:
 		integer--;
 		return old;
 	}
+
 };
 
 Fraction operator*(Fraction left, Fraction right)
@@ -257,7 +258,128 @@ Fraction operator-(Fraction left, Fraction right)
 	return result.inverted_numerator_minus();
 }
 
+bool operator==(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	if ((left.get_numerator()*right.get_denominator()) == (right.get_numerator()*left.get_denominator()))
+	{
+		return 1;
+	}
+	else return 0;
+}
+
+bool operator!=(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	if ((left.get_numerator() * right.get_denominator()) != (right.get_numerator() * left.get_denominator()))
+	{
+		return 1;
+	}
+	else return 0;
+}
+
+bool operator<(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	if ((left.get_numerator() * right.get_denominator()) < (right.get_numerator() * left.get_denominator()))
+	{
+		return 1;
+	}
+	else return 0;
+}
+
+bool operator>(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	if ((left.get_numerator() * right.get_denominator()) > (right.get_numerator() * left.get_denominator()))
+	{
+		return 1;
+	}
+	else return 0;
+}
+
+bool operator>=(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	if ((left.get_numerator() * right.get_denominator()) >= (right.get_numerator() * left.get_denominator()))
+	{
+		return 1;
+	}
+	else return 0;
+}
+
+bool operator<=(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	if ((left.get_numerator() * right.get_denominator()) <= (right.get_numerator() * left.get_denominator()))
+	{
+		return 1;
+	}
+	else return 0;
+}
+
+ostream& operator<<(ostream& os, const Fraction& obj)
+{
+	if (obj.get_integer())os << obj.get_integer();
+	if (obj.get_numerator())
+	{
+		if (obj.get_integer())os << "(";
+		os << obj.get_numerator() << "/" << obj.get_denominator();
+		if (obj.get_integer())os << ")";
+	}
+	else if (obj.get_integer() == 0) os << 0;
+	return os;
+}
+
+istream& operator>>(istream& is, Fraction& obj)
+{
+	/*int integer;
+	int numerator;
+	int denominator;
+	is >> integer >> numerator >> denominator;
+	obj.set_integer(integer);
+	obj.set_numerator(numerator);
+	obj.set_denominator(denominator);*/
+
+	const int SIZE = 80;
+	char buffer[SIZE] = {};
+	//is >> buffer;
+	is.getline(buffer, SIZE);
+	//5
+	//1/2
+	//2(3/4)
+	//2 3/4
+	char delimiters[] = "() /"; // Разделители по которым мы будем делить строку
+	char* number[5];		//В это массиве будут храниться указатели на числа в buffer
+	int n = 0;		//Счетчик прочитаных из строки чисел
+	for (char* pch = strtok(buffer, delimiters); pch; pch = strtok(NULL, delimiters))
+	{
+		number[n++] = pch;
+	}
+	switch (n)
+	{
+		// int atoi(char* str) - преобразует строкув целое число
+	case 1:obj.set_integer(atoi(number[0])); break;
+	case 2:
+		obj.set_numerator(atoi(number[0]));
+		obj.set_denominator(atoi(number[1]));
+		break;
+	case 3:
+		obj.set_integer(atoi(number[0]));
+		obj.set_numerator(atoi(number[1]));
+		obj.set_denominator(atoi(number[2]));
+	}
+	return is;
+}
+
 //#define CONSTRUCTORS_CHECK
+//#define ARITHMETICAL_OPERATOR_CHECK
 
 void main()
 {
@@ -278,6 +400,7 @@ void main()
 	D.print();
 #endif // CONSTRUCTORS_CHECK
 
+#ifdef ARITHMETICAL_OPERATOR_CHECK
 	int a = 2;
 	int b = 3;
 	int c = a * b;
@@ -288,8 +411,10 @@ void main()
 	A *= B;
 	A.print();
 	A = B++;
-	A.print();
-	B.print();
+	/*A.print();
+	B.print();*/
+	cout << A << endl;
+	cout << B << endl;
 	/*Fraction C = A * B;
 	C.print();
 
@@ -319,4 +444,14 @@ void main()
 	A = Fraction(2, 3, 4);
 	A -= B;
 	A.print();*/
+#endif // ARITHMETICAL_OPERATOR_CHECK
+
+	Fraction A;
+	cout << "Введите простую дробь: "; cin >> A;
+	cout << A << endl;
+
+	Fraction B(2, 2, 2);
+	Fraction C(2, 2, 2);
+
+	cout << (B == C) << endl;
 }
