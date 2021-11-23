@@ -270,24 +270,13 @@ bool operator==(Fraction left, Fraction right)
 	else return false;*/
 }
 
-bool operator!=(Fraction left, Fraction right)
+bool operator!=(const Fraction& left, const Fraction& right)
 {
 	/*left.to_improper();
 	right.to_improper();*/
-	return (left.to_improper().get_numerator() * right.get_denominator()) != (right.to_improper().get_numerator() * left.get_denominator());
+	return !(left == right);
+	//return (left.to_improper().get_numerator() * right.get_denominator()) != (right.to_improper().get_numerator() * left.get_denominator());
 	/*if ((left.get_numerator() * right.get_denominator()) != (right.get_numerator() * left.get_denominator()))
-	{
-		return true;
-	}
-	else return false;*/
-}
-
-bool operator<(Fraction left, Fraction right)
-{
-	/*left.to_improper();
-	right.to_improper();*/
-	return (left.to_improper().get_numerator() * right.get_denominator()) < (right.to_improper().get_numerator() * left.get_denominator());
-	/*if ((left.get_numerator() * right.get_denominator()) < (right.get_numerator() * left.get_denominator()))
 	{
 		return true;
 	}
@@ -299,6 +288,18 @@ bool operator>(Fraction left, Fraction right)
 	/*left.to_improper();
 	right.to_improper();*/
 	return (left.to_improper().get_numerator() * right.get_denominator()) > (right.to_improper().get_numerator() * left.get_denominator());
+	/*if ((left.get_numerator() * right.get_denominator()) < (right.get_numerator() * left.get_denominator()))
+	{
+		return true;
+	}
+	else return false;*/
+}
+
+bool operator<(Fraction left, Fraction right)
+{
+	/*left.to_improper();
+	right.to_improper();*/
+	return (left.to_improper().get_numerator() * right.get_denominator()) < (right.to_improper().get_numerator() * left.get_denominator());
 	/*if ((left.get_numerator() * right.get_denominator()) > (right.get_numerator() * left.get_denominator()))
 	{
 		return true;
@@ -306,11 +307,12 @@ bool operator>(Fraction left, Fraction right)
 	else return false;*/
 }
 
-bool operator>=(Fraction left, Fraction right)
+bool operator>=(const Fraction& left, const Fraction& right)
 {
 	/*left.to_improper();
 	right.to_improper();*/
-	return (left.to_improper().get_numerator() * right.get_denominator()) >= (right.to_improper().get_numerator() * left.get_denominator());
+	return left > right || left == right;
+	//return (left.to_improper().get_numerator() * right.get_denominator()) >= (right.to_improper().get_numerator() * left.get_denominator());
 	/*if ((left.get_numerator() * right.get_denominator()) >= (right.get_numerator() * left.get_denominator()))
 	{
 		return true;
@@ -322,7 +324,9 @@ bool operator<=(Fraction left, Fraction right)
 {
 	/*left.to_improper();
 	right.to_improper();*/
-	return (left.to_improper().get_numerator() * right.get_denominator()) <= (right.to_improper().get_numerator() * left.get_denominator());
+	return !(left > right);
+	//return left < right || left == right;
+	//return (left.to_improper().get_numerator() * right.get_denominator()) <= (right.to_improper().get_numerator() * left.get_denominator());
 	/*if ((left.get_numerator() * right.get_denominator()) <= (right.get_numerator() * left.get_denominator()))
 	{
 		return true;
@@ -459,5 +463,5 @@ void main()
 	Fraction A(2, 1, 2);
 	Fraction B(2, 5, 10);
 
-	cout << (A == B) << endl;
+	cout << (A != B) << endl;
 }
