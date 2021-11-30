@@ -134,6 +134,8 @@ public:
 	}
 };
 
+
+
 Fraction operator+(const Fraction& left, const Fraction& right)
 {
 	Fraction result;

@@ -60,6 +60,7 @@ public:
 		other.size = 0;
 		cout << "MoveConstructor:" << this << endl;
 	}
+
 	~String()
 	{
 		delete[] this->str;
@@ -141,8 +142,8 @@ ostream& operator<<(ostream& os, const String& obj)
 	return os << obj.get_str();
 }
 
-#define CONSTRUCTORS_CHECK
-//#define OPERATOR_PLUS_CHECK
+//#define CONSTRUCTORS_CHECK
+#define OPERATOR_PLUS_CHECK
 //#define CONSTRUCTOR_CALLING
 
 void main()
@@ -175,8 +176,10 @@ void main()
 	String str1 = "Hello ";
 	String str2 = "World";
 	cout << "n\----------------------------------------------------------------" << endl;
-	String str3;
-	str3 = str1 + str2;	//Неявно вызываем оператор +
+	String str3 = str1 + str2;
+	cout << "n\----------------------------------------------------------------" << endl;
+	String str4 = str1;
+	//str3 = str1 + str2;	//Неявно вызываем оператор +
 	cout << "n\----------------------------------------------------------------" << endl;
 	cout << str3 << endl;
 	//cout << operator+(str1, str2) << endl;	//Явный вызов оператора +
