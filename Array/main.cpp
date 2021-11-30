@@ -141,8 +141,6 @@ void main()
 	B.print();
 	cout << endl;
 	Array C;
-	//C = A * B;
-	//C.print();
 	C = A * B;
 	C.print();
 }
