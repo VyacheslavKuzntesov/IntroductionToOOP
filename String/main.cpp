@@ -38,18 +38,18 @@ public:
 		//this->str = new char[size] {};
 		cout << "DefConstruct:\t" << this << endl;
 	}
-	String(const char* str) :size(strlen(str) + 1), str(new char[size] {})
+	String(const char* str) :String(strlen(str)+1)
 	{
 		//this->size = strlen(str) + 1;
 		//this->str = new char[size] {};
 		for (int i = 0; i < size; i++)this->str[i] = str[i];
 		cout << "Constructor:\t" << this << endl;
 	}
-	String(const String& other) :size(other.get_size()), str(new char[size] {})
+	String(const String& other) :String(other.str)
 	{
 		//this->size = other.get_size();
 		//this->str = new char[size] {};
-		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
+		//for (int i = 0; i < size; i++)this->str[i] = other.str[i];
 		cout << "CopyConstructor:" << this << endl;
 	}
 	String(String&& other) :size(other.size), str(other.str)
@@ -226,4 +226,10 @@ void main()
 	Move-методы повышают скорость работы классах которые используют динамическую память в классах не использующих динамическую память методы не имеют смысла
 
 	СПОСОБЫ ВЫЗОВА И НАПИСАНИЯ КОНСТРУКТОРА
+
+	ДЕЛЕГИРОВАНИЕ КОНСТРУКТОРОВ
+	Делигирование - это передача полномочий либо ответствености другому лицу
+	Делегтрование конструкторов это вызов из одного конструктора другова конструктора
+	Делегтрование конструкторов позволяет повторно использовать код написанный в других конструкторах
+
 */
